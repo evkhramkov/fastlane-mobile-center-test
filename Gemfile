@@ -2,4 +2,4 @@
 
 source "https://rubygems.org"
 
-gemspec path: File.expand_path("/home/ewgenius/Projects/Akvelon/fastlane")
+gemspec path: File.expand_path("~/Projects/Akvelon/fastlane")
