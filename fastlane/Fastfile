@@ -1,0 +1,19 @@
+# load variables from .env file if it exists
+if File.exist?('../.env')
+  open('../.env', 'r').readlines.each do |l|
+    kv = l.split('=')
+    ENV[kv[0]] = kv[1].chomp
+  end
+end
+
+lane :test do
+  # mobile_center(api_token: ENV["MOBILE_CENTER_API_TOKEN"])
+  mobile_center_upload(
+    api_token: ENV["MOBILE_CENTER_API_TOKEN"],
+    owner_name: ENV["MOBILE_CENTER_OWNER_NAME"],
+    app_name: ENV["MOBILE_CENTER_APP_NAME"],
+    file: ENV["MOBILE_CENTER_DISTRIBUTE_FILE"],
+    group: ENV["MOBILE_CENTER_DISTRIBUTE_GROUP"],
+    release_notes: ENV["MOBILE_CENTER_DISTRIBUTE_RELEASE_NOTES"]
+  )
+end
