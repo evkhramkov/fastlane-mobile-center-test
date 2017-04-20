@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo "/home/ewgenius/Applications/Xcode/Contents/Developer"
