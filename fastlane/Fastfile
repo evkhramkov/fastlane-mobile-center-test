@@ -7,7 +7,6 @@ if File.exist?('../.env')
 end
 
 lane :test do
-  # mobile_center(api_token: ENV["MOBILE_CENTER_API_TOKEN"])
   mobile_center_upload(
     api_token: ENV["TEST_MOBILE_CENTER_API_TOKEN"],
     owner_name: ENV["TEST_MOBILE_CENTER_OWNER_NAME"],
@@ -16,4 +15,8 @@ lane :test do
     group: ENV["TEST_MOBILE_CENTER_DISTRIBUTE_GROUP"],
     release_notes: ENV["TEST_MOBILE_CENTER_DISTRIBUTE_RELEASE_NOTES"]
   )
+
+  UI.message("\n\n\n=====================================\n testing shared values\n=====================================")
+  UI.message("MOBILE_CENTER_DOWNLOAD_LINK = #{Actions.lane_context[SharedValues::MOBILE_CENTER_DOWNLOAD_LINK]}")
+  UI.message("MOBILE_CENTER_BUILD_INFORMATION = #{JSON.pretty_generate(Actions.lane_context[SharedValues::MOBILE_CENTER_BUILD_INFORMATION])}")
 end
