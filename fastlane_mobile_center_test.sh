@@ -4,7 +4,7 @@
 
 export PATH=$PATH:$PWD/fake-bin/
 cd ../fastlane
-bundle install
+bundle install --quiet
 
 echo ================================================================================
 echo ========================== RUNNING UNIT TESTS ==================================
