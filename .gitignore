@@ -1,2 +1,2 @@
 .env
-./fastlane/report.xml
+fastlane/report.xml
