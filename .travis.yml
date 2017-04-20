@@ -1,4 +1,5 @@
-os: osx # enable this if you need macOS support
+# os: osx # enable this if you need macOS support
+dist: trusty
 language: ruby
 rvm:
   - 2.2.4
