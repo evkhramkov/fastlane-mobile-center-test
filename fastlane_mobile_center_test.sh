@@ -4,4 +4,5 @@
 
 cp ./xcode-select ../fastlane
 cd ../fastlane
+bundle install
 DEBUG=true bundle exec rspec ./fastlane/spec/actions_specs/mobile_center_upload_spec.rb
