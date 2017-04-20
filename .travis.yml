@@ -4,7 +4,8 @@ language: ruby
 rvm:
   - 2.2.4
 install:
-  - './get-fastlane.sh'
+  - './fastlane_cloen_fork.sh'
   - 'bundle'
 script:
+  - './fastlane_mobile_center_test.sh'
   - 'bundle exec fastlane test'
