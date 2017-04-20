@@ -1,0 +1,10 @@
+# os: osx # enable this if you need macOS support
+dist: trusty
+language: ruby
+rvm:
+  - 2.2.4
+install:
+  - './get-fastlane.sh'
+  - 'bundle'
+script:
+  - 'bundle exec fastlane test'
