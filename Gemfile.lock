@@ -1,7 +1,7 @@
 PATH
   remote: /home/ewgenius/Projects/Akvelon/fastlane
   specs:
-    fastlane (2.27.0)
+    fastlane (2.28.2)
       CFPropertyList (>= 2.3, < 3.0.0)
       addressable (>= 2.3, < 3.0.0)
       babosa (>= 1.0.2, < 2.0.0)
@@ -42,6 +42,8 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     ast (2.3.0)
     babosa (1.0.2)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.3)
     byebug (9.0.6)
     claide (1.0.1)
@@ -58,6 +60,7 @@ GEM
       tins (~> 1.6)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
+    debug_inspector (0.0.2)
     diff-lcs (1.3)
     docile (1.1.5)
     domain_name (0.5.20170404)
@@ -97,6 +100,7 @@ GEM
       domain_name (~> 0.5)
     httpclient (2.8.3)
     hurley (0.2)
+    interception (0.5)
     json (2.0.4)
     jwt (1.5.6)
     little-plugger (1.1.4)
@@ -123,6 +127,12 @@ GEM
     pry-byebug (3.4.2)
       byebug (~> 9.0)
       pry (~> 0.10)
+    pry-rescue (1.4.5)
+      interception (>= 0.5)
+      pry
+    pry-stack_explorer (0.4.9.2)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
     public_suffix (2.0.5)
     rainbow (2.2.1)
     rake (11.3.0)
@@ -182,7 +192,7 @@ GEM
     uber (0.0.15)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.3)
+    unf_ext (0.0.7.4)
     unicode-display_width (1.1.3)
     webmock (2.3.2)
       addressable (>= 2.3.6)
@@ -209,6 +219,8 @@ DEPENDENCIES
   fastlane!
   pry
   pry-byebug
+  pry-rescue
+  pry-stack_explorer
   rake (< 12)
   rb-readline
   rest-client (~> 1.6.7)
