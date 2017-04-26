@@ -9,7 +9,7 @@ end
 lane :test do
   Actions.lane_context[SharedValues::FL_CHANGELOG] = 'shared changelog'
 
-  UI.message("\n\n\n=====================================\n uploading android\n=====================================")  
+  UI.message("\n\n\n=====================================\n uploading android\n=====================================")
 
   mobile_center_upload(
     api_token: ENV["TEST_MOBILE_CENTER_API_TOKEN"],
@@ -20,7 +20,7 @@ lane :test do
     release_notes: ENV["TEST_MOBILE_CENTER_DISTRIBUTE_RELEASE_NOTES"]
   )
 
-  UI.message("\n\n\n=====================================\n uploading ios with dSYM files (not zipped) \n=====================================")  
+  UI.message("\n\n\n=====================================\n uploading ios with dSYM files (not zipped) \n=====================================")
 
   mobile_center_upload(
     api_token: ENV["TEST_MOBILE_CENTER_API_TOKEN"],
@@ -32,7 +32,7 @@ lane :test do
     release_notes: ENV["TEST_MOBILE_CENTER_DISTRIBUTE_RELEASE_NOTES"]
   )
 
-  UI.message("\n\n\n=====================================\n uploading only dSYM files (not zipped) \n=====================================")  
+  UI.message("\n\n\n=====================================\n uploading only dSYM files (not zipped) \n=====================================")
 
   mobile_center_upload(
     api_token: ENV["TEST_MOBILE_CENTER_API_TOKEN"],
@@ -42,6 +42,30 @@ lane :test do
     dsym: "./fastlane/Themoji.dSYM",
     release_notes: ENV["TEST_MOBILE_CENTER_DISTRIBUTE_RELEASE_NOTES"]
   )
+
+  UI.message("\n\n\n=====================================\n showing uploaded dSYM files \n=====================================")
+  require 'faraday'
+  connection = Faraday.new(url: 'https://api.mobile.azure.com') do |builder|
+    builder.request :json
+    builder.response :json, content_type: /\bjson$/
+    builder.adapter :net_http
+  end
+
+  response = connection.get do |req|
+    req.url("/v0.1/apps/#{ENV['TEST_MOBILE_CENTER_OWNER_NAME']}/MyApplication-01/symbol_uploads")
+    req.headers['X-API-Token'] = ENV['TEST_MOBILE_CENTER_API_TOKEN']
+  end
+
+  UI.message("\n#{Terminal::Table.new(rows: response.body.map!(&:values),
+                                      headings: %w[symbol_upload_id app_id origin status symbol_type])}")
+
+  # use it for deleting all dSYM uploads
+  # response.body.map! do |item|
+  #   connection.delete do |req|
+  #     req.url("/v0.1/apps/#{ENV['TEST_MOBILE_CENTER_OWNER_NAME']}/MyApplication-01/symbol_uploads/#{item[0]}")
+  #     req.headers['X-API-Token'] = ENV['TEST_MOBILE_CENTER_API_TOKEN']
+  #   end
+  # end
 
   UI.message("\n\n\n=====================================\n testing shared values\n=====================================")
   UI.message("MOBILE_CENTER_DOWNLOAD_LINK = #{Actions.lane_context[SharedValues::MOBILE_CENTER_DOWNLOAD_LINK]}")
